@@ -14,6 +14,8 @@ function log(data) {
 }
 
 var GameClient = function() {
+    
+    var gc = this;
 
     function onMessage(data) {
         debug(data);
@@ -64,14 +66,40 @@ var GameClient = function() {
     }
 
     var socket = new io.Socket(null, {transports: ['websocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'flashsocket']}); // @BUGFIX: flashsocket seems to be broken
-    socket.connect();
-    socket.on('message', onMessage);
-    socket.on('connect', onConnect);
-    if(window.location.hash != '') {
-        var hash = window.location.hash;
-    } else {
-        var hash = '#' + parseInt(Math.random() * 100000000).toString(16);
-        window.location.hash = hash;
+
+    function joinGame() {
+        socket.connect();
+        socket.on('message', onMessage);
+        socket.on('connect', onConnect);
+        if(window.location.hash != '') {
+            var hash = window.location.hash;
+        } else {
+            var hash = '#' + parseInt(Math.random() * 100000000).toString(16);
+            window.location.hash = hash;
+        }
+        socket.send(JSON.stringify({'type': 'gameid', 'data': hash}));
     }
-    socket.send(JSON.stringify({'type': 'gameid', 'data': hash}));
+
+    if(store.get('tw_nick') === undefined) {
+        changeNickname();
+    } else {
+        this.nickname = store.get('tw_nick');
+        $('span.nick').text(this.nickname);
+    }
+    $('#change_nick').live('click', changeNickname);
+
+
+
+
+    
+    function changeNickname() {
+        $('body').append('<div class="dialog" id="setnick_dialog"><label for="nick">Nichname:</label><input type="text" id="nick" name="nick" /><br /><input type="button" id="setnick" value="okay" /></div>');
+        $('#setnick').click(function() {
+            console.log($('#nick').val());
+            store.set('tw_nick', $('#nick').val());
+            gc.nickname = store.get('tw_nick');
+            $('span.nick').text(gc.nickname);
+            $('#setnick_dialog').remove();
+        });
+    }
 }

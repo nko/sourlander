@@ -5,10 +5,15 @@
         <script type="text/javascript" src="/lib/GameClient.js"></script>
         <script type="text/javascript" src="/lib/raphael.js"></script>
         <script type="text/javascript" src="/lib/Map.js"></script>
+        <script type="text/javascript" src="/lib/store.js"></script>
+        <script type="text/javascript" src="/lib/json.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
         <link rel="stylesheet" href="/css/game.css" />
     </head>
     <body>
+        <div id="header">
+            Nickname: <span class="nick">none</span> [<a id="change_nick">change</a>] |
+        </div>
         <div id="map"></div>
         <div id="log"></div>
         <input type="text" name="chat" id="chat" />
