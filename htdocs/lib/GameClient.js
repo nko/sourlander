@@ -81,6 +81,7 @@ var GameClient = function() {
     function setGameHash(newHash) {
         gc.hash = newHash;
         $('.hash').text(newHash);
+        window.location.hash = newHash;
     }   
 
     function setNickname(newNick) {
@@ -107,18 +108,28 @@ var GameClient = function() {
     $('#join_game').live('click', joinGame);
 
     function changeNickname() {
-        $('body').append('<div class="dialog" id="setnick_dialog"><label for="nick">Nichname:</label><input type="text" id="nick" name="nick" /><br /><input type="button" id="setnick" value="okay" /></div>');
-        $('#setnick').click(function() {
+        $('body').append('<div class="dialog" id="setnick_dialog"><form> <label for="nick">Nichname:</label> <input type="text" id="nick" name="nick" /><br /> <input type="submit" value="okay" /><input type="button" class="cancel" value="cancel" /></form></div>');
+        $('#setnick_dialog .cancel').click(function() {
+            $('#setnick_dialog').remove();
+            return false;
+        });
+        $('#setnick_dialog form').submit(function() {
             setNickname($('#nick').val());
             $('#setnick_dialog').remove();
+            return false;
         });
     }
 
     function changeGameHash() {
-        $('body').append('<div class="dialog" id="sethash_dialog"><label for="hash">Gamename:</label><input type="text" id="hash" name="hash" /><br /><input type="button" id="sethash" value="okay" /></div>');
-        $('#sethash').click(function() {
+        $('body').append('<div class="dialog" id="sethash_dialog"><form><label for="hash">GameName:</label><input type="text" id="hash" name="hash" /><br /><input type="submit" value="okay" /><input type="button" class="cancel" value="cancel" /></form></div>');
+        $('#sethash_dialog .cancel').click(function() {
+            $('#sethash_dialog').remove();
+            return false;
+        });
+        $('#sethash_dialog form').submit(function() {
             setGameHash('#' + $('#hash').val());   
             $('#sethash_dialog').remove();
+            return false;
         }); 
     }
 }
