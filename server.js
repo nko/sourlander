@@ -3,8 +3,10 @@ var http   = require('http'),
     io     = require('./lib/socket.io'),
     config = require('./config');
 
-var web = http.createServer(ws).listen(config.webport);
+var web = http.createServer(ws)
 var socket = io.listen(web);
+
+web.listen(80);
 
 socket.on('connection', function(client) {
     
