@@ -45,6 +45,8 @@ var Canon = function(map, x) {
     this.y  = y = map.getY(x);
     this.r  = 20;
     this.ba = 0;
+    this.ca = 0;
+    this.turn_p = {};
 
     var py = map.getY(x-1);
     var ny = map.getY(x+1);
@@ -70,14 +72,63 @@ var Canon = function(map, x) {
     this.move(20);
 
     var can = this;
-    $('body').bind('keyup', function(ev) {
-        if(ev.keyCode == 37) {
-            can.move(-2);
-        }
-        if(ev.keyCode == 39) {
-            can.move(2);
-        }
-    });
+
+    function bindMovement() {
+        var intv = {};
+        $('body').bind('keyup', function(ev) {
+            console.log(ev);
+            switch(ev.keyCode) {
+                case 37:
+                    window.clearInterval(intv.left);
+                    console.log('up');
+                    break;
+                case 38:
+                    window.clearInterval(intv.top);
+                    console.log('up');
+                    break;
+                case 39:
+                    window.clearInterval(intv.right);
+                    console.log('up');
+                    break;
+                case 40:
+                    window.clearInterval(intv.down);
+                    console.log('up');
+                    break;
+            }
+        });
+
+        $('body').bind('keydown', function(ev) {
+            if(ev.keyCode == 37) {
+                if(intv.left == undefined) {
+                    intv.left = setInterval(function() {
+                        can.move(-2);
+                    }, 100);
+                }
+            }
+            if(ev.keyCode == 38) {
+                if(intv.top == undefined) {
+                    intv.top = setInterval(function() {
+                        can.turn(2);
+                    }, 100);
+                }
+            }
+            if(ev.keyCode == 39) {
+                if(intv.right == undefined) {
+                    intv.right = setInterval(function() {
+                        can.move(2);
+                    }, 100);
+                }
+            }
+            if(ev.keyCode == 40) {
+                if(intv.down == undefined) {
+                    intv.down = setInterval(function() {
+                        can.turn(-2);
+                    }, 100);
+                }
+            }
+        });
+    };
+    bindMovement();
 }
 
 Canon.prototype.move = function(diff) {
@@ -88,23 +139,36 @@ Canon.prototype.move = function(diff) {
         ny   = this.map.getY(x+1), 
         angl = Raphael.angle(x+1, ny, x-1, py);
 
-        this.x = x;
-        this.y = y;
+    this.x = x;
+    this.y = y;
+    this.ba = angl;
+    
 
     this.canon.translate(diff, dy);
     this.canon.attr({rotation: (angl) + ' ' + x +' ' + y});
+
+    var ang = this.ba;
+    if(ang > 180) {
+        ang -= 180;
+    }
+    var dx = x + 20 * Math.sin(this.ba * Math.PI / 180);
+    var dy = y - 20 * Math.cos(this.ba * Math.PI / 180);
+    this.turnp = {x: dx, y: dy};
+    if(this.turnpo) {
+        this.turnpo.attr({cx: dx, cy:dy});
+    } else {
+        this.turnpo = this.map.paper.circle(dx, dy, 2);
+    }
 }
 
 Canon.prototype.turn = function(ang) {
-    var x = this.x, 
-        y = this.y, 
-        r = this.r;
+      var  ang = this.ca + ang,
+           dx  = this.turnp.x,
+           dy  = this.turnp.y;
 
-    var dx = x + r * Math.sin(this.ba * Math.PI / 180);
-    var dy = y - r * Math.cos(this.ba * Math.PI / 180);
-    this.map.paper.circle(dx, dy, 2);
-//    this.tube.animate({rotation: ang + ' ' + dx + ' ' + dy}, 2000);
-    this.tube.rotate(ang, true);
+      this.ca = ang;
+
+      this.tube.attr({rotation: (ang + this.ba) + ' ' + dx + ' ' + dy});
 }
 
 
