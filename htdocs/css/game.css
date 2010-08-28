@@ -1,4 +1,58 @@
-#map {
+body, html {
+    margin: 0;
+    padding:0;
+    width: 100%;
+    background-color: #444;
+}
+
+#map, #chat, #header {
     margin: auto;
     width: 720px;
+    margin-top: 0.5em;
+}
+
+#map {
+    background-color: #222;
+    padding: 0.4em; 
+    display: none;
+}
+
+.dialog {
+    width: 204px;
+    padding: .5em 1em;
+    margin: auto;
+    background-color: black;
+    color: white;
+    -moz-border-radius: 0.5em;
+    -webkit-border-radius: 0.5em;
+    box-shadow: 0px 0px 20px black;
+    -webkit-box-shadow: 0px 0px 10px black;
+    -moz-box-shadow: 0px 0px 10px black;
+}
+
+.dialog label {
+    display: block;
+}
+.dialog input[type="text"] {
+    width: 200px;
+}
+
+#header {
+    background-color: #222;
+    color: #EEE;
+    margin-top:0;
+    padding:0.2em 0.4em;
+}   
+#chat {
+    display: none;
+}
+
+#chat_input {
+    width: 100%;
+}
+
+#chat_log {
+    height: 200px;
+    overflow: auto;
+    color: #EEE;
 }

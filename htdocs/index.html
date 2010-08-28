@@ -12,11 +12,17 @@
     </head>
     <body>
         <div id="header">
-            Nickname: <span class="nick">none</span> [<a id="change_nick">change</a>] |
+            Nickname: <span class="nick">none</span> [ <a id="change_nick">change</a> ] |
+            Status: <span clasS="status">disconnected</span> | 
+            Game: <span class="hash">#</span> [ <a id="change_game_hash">change</a> ] 
+            [ <a id="join_game">join</a> ]
         </div>
         <div id="map"></div>
         <div id="log"></div>
-        <input type="text" name="chat" id="chat" />
+        <div id="chat">
+            <input type="text" name="chat_input" id="chat_input" />
+            <div id="chat_log"></div>        
+        </div>
         <script type="text/javascript">
             io.setPath('/lib/');
             var gc  = new GameClient();
