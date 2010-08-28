@@ -29,6 +29,12 @@ var GameClient = function() {
     socket.on('message', onMessage);
     socket.on('connect', onConnect);
     if(window.location.hash != '') {
-        socket.send(JSON.stringify({'type': 'gameid', 'data': window.location.hash}));
+        var hash = window.location.hash;
+    } else {
+        $('#log').append('random hash...');
+        var hash = '#' + parseInt(Math.random() * 100000000).toString(16);
+        $('#log').append(hash);
+        window.location.hash = hash;
     }
+    socket.send(JSON.stringify({'type': 'gameid', 'data': hash}));
 }
