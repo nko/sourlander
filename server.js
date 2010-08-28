@@ -6,7 +6,7 @@ var http   = require('http'),
 var web = http.createServer(ws)
 var socket = io.listen(web);
 
-web.listen(80);
+web.listen(config.webport);
 
 socket.on('connection', function(client) {
     

@@ -1,2 +1,2 @@
-exports.webport = 3000;
+exports.webport = 80;
 exports.documentRoot = './htdocs';
