@@ -2,6 +2,8 @@ var http    = require('http'),
     ws      = require('./lib/webserver'),
     io      = require('./lib/socket.io'),
     GClient = require('./lib/GameClient'),
+    Game    = require('./lib/Game'),
+    Pool    = require('./lib/GamePool'),
     sys     = require('sys'),
     config  = require('./config');
 
