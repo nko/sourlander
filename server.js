@@ -6,7 +6,7 @@ var http    = require('http'),
     config  = require('./config');
 
 var web = http.createServer(ws)
-var socket = io.listen(web);
+var socket = io.listen(web, {transports: ['websocket', 'htmlfile', 'xhr-multipart', 'xhr-polling', 'flashsocket']}); // @BUGFIX: flashsocket seems to be broken
 
 web.listen(config.webport);
 
