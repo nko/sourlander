@@ -80,18 +80,22 @@ var Canon = function(map, x) {
             switch(ev.keyCode) {
                 case 37:
                     window.clearInterval(intv.left);
+                    delete intv.left;
                     console.log('up');
                     break;
                 case 38:
                     window.clearInterval(intv.top);
+                    delete intv.top;
                     console.log('up');
                     break;
                 case 39:
                     window.clearInterval(intv.right);
+                    delete intv.right;
                     console.log('up');
                     break;
                 case 40:
                     window.clearInterval(intv.down);
+                    delete intv.down;
                     console.log('up');
                     break;
             }
