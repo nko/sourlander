@@ -2,7 +2,7 @@ var config = require('./config'),
     mime   = require('./mime'),
     url    = require('url'),
     fs     = require('fs'),
-    sys    = require('sys'),
+    sys    = require('sys'), 
     path   = require('path');
 
 function sendFile(path, response) {
@@ -19,6 +19,7 @@ function sendFile(path, response) {
 }
 
 var webserver = module.exports = function(request, response) {
+    sys.puts('request: ' + request.url);
     var query = url.parse(request.url); // parse the requestet path. 
     if(query.pathname === '/') {
         query.pathname = '/index.html';
