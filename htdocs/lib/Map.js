@@ -2,7 +2,7 @@ var Map = function Map(sel, seed) {
     $('#' + sel).html('');
     this.size  = {x: 720, y: 400};
     this.paper = Raphael(sel, this.size.x, this.size.y);
-    this.paper.rect(0, 0, this.size.x, this.size.y);
+    this.paper.rect(0, 0, this.size.x, this.size.y).attr('fill', '#AAF');
     this.points = [];
     var res = 5;
     for(i=0;i<=this.size.x/res;i++) {
