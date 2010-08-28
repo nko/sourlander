@@ -12,9 +12,15 @@
         <div id="map"></div>
         <div id="log"></div>
         <script type="text/javascript">
+            function generateMapSeed() {
+                var r0 = Math.random() * 180;
+                var r1 = Math.random() * 6 + 9;
+                var r2 = Math.random() * 30+30;
+                return [r0, r1, r2];
+            }
             io.setPath('/lib/');
             var gc  = new GameClient();
-            var map = new Map('map');
+            var map = new Map('map', generateMapSeed());
         </script>
     </body>
 </html>
