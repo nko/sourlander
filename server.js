@@ -1,5 +1,5 @@
-var http = require('http');
+var http   = require('http'),
+    ws     = require('./webserver'),
+    config = require('./config');
 
-var web = http.createServer(function(req, res) {
-
-}).listen(80);
+var web = http.createServer(ws).listen(config.webport);
