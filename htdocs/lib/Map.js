@@ -32,10 +32,10 @@ Map.prototype.draw = function() {
     path += 'L' + this.size.x + ' ' +this.size.y;
     path += 'L0 ' +this.size.y + 'z';
     this.paper.path(path).attr({'fill': 'green', 'stroke': 'green'});
-    this.drawCanon(250)
+    this.drawCannon(250)
 }
 
-Map.prototype.drawCanon = function(x, y) {
-    new Canon(this, x);
+Map.prototype.drawCannon = function(x, y) {
+    new Cannon(this, x);
 }
 

@@ -1,5 +1,5 @@
 
-var Canon = function(map, x) {
+var Cannon = function(map, x) {
     this.map = map;
     this.pos = { x: 0, 
                  y: 0 };
@@ -19,12 +19,11 @@ var Canon = function(map, x) {
     foot.attr('fill', '#aa4400').scale(0.5, 0.5);
 
     can.attr('cx', 400);
-    //canon.attr({rotation: (angl) + ' ' + x +' ' + y});
+
     this.ba    = angl;
     this.foot  = foot;
     this.tube  = can; 
 
-//    this.update(parseInt(Math.random() * 500) + 100);
     this.update(300);
 
     var can = this;
@@ -93,7 +92,7 @@ var Canon = function(map, x) {
     bindMovement();
 }
 
-Canon.prototype.move = function(diff) {
+Cannon.prototype.move = function(diff) {
     var x    = this.pos.x + diff;
     this.update(x);
      /*
@@ -130,14 +129,14 @@ Canon.prototype.move = function(diff) {
 */
 }
 
-Canon.prototype.getAngle = function(x) {
+Cannon.prototype.getAngle = function(x) {
         var py = this.map.getY(x-5); 
         var ny = this.map.getY(x+5); 
         return Raphael.angle(x+5, ny, x-5, py);
     }
 
 
-Canon.prototype.update = function(x) {
+Cannon.prototype.update = function(x) {
     
     var ox = this.pos.x;
     var nx = x;
@@ -163,7 +162,7 @@ Canon.prototype.update = function(x) {
 
 }
 
-Canon.prototype.turn = function(ang) {
+Cannon.prototype.turn = function(ang) {
     this.ca = this.ca - ang;
     this.update(this.pos.x);
 }
