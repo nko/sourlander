@@ -9,11 +9,15 @@ body, html {
     margin: auto;
     width: 720px;
     margin-top: 0.5em;
+    box-shadow: 0px 0px 5px black;
+    -webkit-box-shadow: 0px 0px 10px #333;
+    -moz-box-shadow: 0px 0px 10px #333;
+    background-color: #222;
+    padding: 5px; 
 }
 
 #map {
     background-color: #222;
-    padding: 0.4em; 
     display: none;
 }
 
@@ -21,6 +25,7 @@ body, html {
     width: 204px;
     padding: .5em 1em;
     margin: auto;
+    margin-top: 2em;
     background-color: black;
     color: white;
     -moz-border-radius: 0.5em;
@@ -41,14 +46,15 @@ body, html {
     background-color: #222;
     color: #EEE;
     margin-top:0;
-    padding:0.2em 0.4em;
 }   
 #chat {
     display: none;
 }
 
 #chat_input {
-    width: 100%;
+    width: 718px;
+    background-color: #444;
+    border: 1px solid #333;
 }
 
 #chat_log {
