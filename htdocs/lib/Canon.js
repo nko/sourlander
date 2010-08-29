@@ -31,8 +31,8 @@ var Canon = function(map, x) {
 
     function bindMovement() {
         var intv = {};
-        $('body').bind('keyup', function(ev) {
-            switch(ev.keyCode) {
+        $(document).keyup(function(ev) {
+            switch(ev.which) {
                 case 37:
                     window.clearInterval(intv.left);
                     delete intv.left;
@@ -52,34 +52,41 @@ var Canon = function(map, x) {
             }
         });
 
-        $('body').bind('keydown', function(ev) {
-            if(ev.keyCode == 37) {
-                if(intv.left == undefined) {
-                    intv.left = setInterval(function() {
-                        can.move(-2);
-                    }, 100);
-                }
-            }
-            if(ev.keyCode == 38) {
-                if(intv.top == undefined) {
-                    intv.top = setInterval(function() {
-                        can.turn(2);
-                    }, 100);
-                }
-            }
-            if(ev.keyCode == 39) {
-                if(intv.right == undefined) {
-                    intv.right = setInterval(function() {
-                        can.move(2);
-                    }, 100);
-                }
-            }
-            if(ev.keyCode == 40) {
-                if(intv.down == undefined) {
-                    intv.down = setInterval(function() {
-                        can.turn(-2);
-                    }, 100);
-                }
+        $(document).keydown(function(ev) {
+            switch(ev.which) {
+                case 37:
+                    if(intv.left == undefined) {
+                        intv.left = setInterval(function() {
+                            can.move(-2);
+                        }, 100);
+                    }
+                    event.preventDefault();
+                    break;
+
+                case 38:
+                    if(intv.top == undefined) {
+                        intv.top = setInterval(function() {
+                            can.turn(2);
+                        }, 100);
+                    }
+                    event.preventDefault();
+                    break;
+                case 39:
+                    if(intv.right == undefined) {
+                        intv.right = setInterval(function() {
+                            can.move(2);
+                        }, 100);
+                    }
+                    event.preventDefault();
+                    break;
+                case 40:
+                    if(intv.down == undefined) {
+                        intv.down = setInterval(function() {
+                            can.turn(-2);
+                        }, 100);
+                    }
+                    event.preventDefault();
+                    break
             }
         });
     };
