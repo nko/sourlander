@@ -108,7 +108,7 @@ var GameClient = function() {
     $('#join_game').live('click', joinGame);
 
     function changeNickname() {
-        $('body').append('<div class="dialog" id="setnick_dialog"><form> <label for="nick">Nichname:</label> <input type="text" id="nick" name="nick" /><br /> <input type="submit" value="okay" /><input type="button" class="cancel" value="cancel" /></form></div>');
+        $('body').append('<div class="dialog" id="setnick_dialog"><form> <label for="nick">Nickname:</label> <input type="text" id="nick" name="nick" /><br /> <input type="submit" value="okay" /><input type="button" class="cancel" value="cancel" /></form></div>');
         $('#setnick_dialog .cancel').click(function() {
             $('#setnick_dialog').remove();
             return false;
